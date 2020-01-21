@@ -1,0 +1,8 @@
+--To start mongod
+mongod --config /usr/local/etc/mongod.conf
+
+--To shutdown mongod started manually
+mongo admin --eval "db.shutdownServer()"
+
+--To start server use
+mongo

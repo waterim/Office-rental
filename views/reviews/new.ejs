@@ -1,0 +1,20 @@
+<%- include("../partials/header") %>
+<div class="container">
+<h1 style="text-align: center;">Add new review to <%= office.name %> </h1>
+
+
+<form action="/offices/<%= office.id %>/reviews" method="POST">
+  <div class="form-group">
+    <input class="form-control" type="text" name="review[text]" placeholder="text"/>
+  </div>
+  <div class="form-group">
+    <input class="form-control" type="text" name="review[author]" placeholder="author"/>
+  </div>
+  <div class="form-group">
+    <button class="btn btn-secondary btn-lg btn-block">Add!</button>
+  </div>
+</form>
+<a href="/offices">Go back</a>
+</div>
+
+<%- include("../partials/footer") %>

@@ -1,0 +1,15 @@
+<%- include("../partials/header") %>
+
+<h1>Show template</h1>
+<p> <%= office.name %> </p>
+<p> <img src="<%= office.image %>" alt=""></p>
+<p> <%= office.description %> </p>
+ <% office.reviews.forEach(review => { %>
+    <p> <%= review.text %> <strong><%= review.author %> </strong></p>
+<% }); %> 
+
+<p>
+    <a class="btn btn-primary btn-sm" href="/offices/<%= office.id %>/reviews/new">Add new review</a>
+</p>
+
+<%- include("../partials/footer") %>

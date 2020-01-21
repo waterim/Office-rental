@@ -1,0 +1,29 @@
+<%- include("../partials/header") %>
+
+<div class="container">
+  <header class="jumbotron">
+    <h1>Welcome To Waterim Office Rental Webpage!</h1>
+    <p>You will find one for sure!</p>
+    <p>
+      <a class="btn btn-sm btn-primary" href="/offices/new"
+        >Add a new office!</a
+      >
+    </p>
+  </header>
+  <h3>The most popular offices here!</h3>
+  <div class="row">
+    <% offices.forEach(office => { %>
+        <div class="card" style="width: 18rem;">
+        <img src="<%= office.image %>" class="card-img-top"/>
+        <div class="card-body">
+            <h5 class="card-title"><strong><%= office.name %> </strong></h5>
+            <p class="card-text">
+              <a href="/offices/<%= office.id %>" class="btn btn-secondary btn-sm">More info</a>
+            </p>
+        </div>
+    </div>
+      <% }) %>
+  </div>
+</div>
+
+<%- include("../partials/footer") %>
