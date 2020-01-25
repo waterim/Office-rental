@@ -1,0 +1,22 @@
+<%- include("../partials/header") %>
+<div class="container">
+<h1>Editing <%= office.name %> </h1>
+
+<form action="/offices/<%= office.id %>?_method=PUT" method="POST">
+  <div>
+    <input type="text" name="updatedOffice[name]" placeholder="name" value="<%= office.name %>"/>
+  </div>
+  <div>
+    <input type="text" name="updatedOffice[image]" placeholder="image url" value="<%= office.image %> "/>
+  </div>
+  <div>
+    <input type="text" name="updatedOffice[description]" placeholder="description" value="<%= office.description %> "/>
+  </div>
+  <div>
+    <button>Add!</button>
+  </div>
+</form>
+<a href="/offices">Go back</a>
+</div>
+
+<%- include("../partials/footer") %>

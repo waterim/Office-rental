@@ -6,3 +6,9 @@ mongo admin --eval "db.shutdownServer()"
 
 --To start server use
 mongo
+
+
+
+          <div class="signedIN">
+            <span>Signed in as <%= currentUser.username %></span>
+          </div>    

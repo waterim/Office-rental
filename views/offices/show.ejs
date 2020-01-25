@@ -1,15 +1,38 @@
 <%- include("../partials/header") %>
+<div id="container">
+    <div class="head-show">    
+        <h1 class="name-show"><%= office.name %> </h1class="head-show">
+    <div class="upd-del-show">
+<% if(currentUser && office.author.id.equals(currentUser.id)){%> 
+    <a href="/offices/<%= office.id %>/edit">Edit page</a>
+    <form action="/offices/<%= office.id %>?_method=DELETE" method="POST">
+        <button>Delete</button>
+    </form>
+    <% } %> 
+    </div>
+    </div>
+    <div class="container-show">
+        <div>
+            <p><img class="image-show" src="<%= office.image %>" alt=""></p>
+        </div>
+        <div class="desc-show">
+            <h1>Description</h1>
+            <p> <%= office.description %> </p>
+        </div>
+        <p class="price-show">Price: 100$ per day</p>
+        <p class="created-show">Post was created by <strong><%= office.author.username %></strong> </p>
 
-<h1>Show template</h1>
-<p> <%= office.name %> </p>
-<p> <img src="<%= office.image %>" alt=""></p>
-<p> <%= office.description %> </p>
- <% office.reviews.forEach(review => { %>
-    <p> <%= review.text %> <strong><%= review.author %> </strong></p>
-<% }); %> 
-
-<p>
-    <a class="btn btn-primary btn-sm" href="/offices/<%= office.id %>/reviews/new">Add new review</a>
-</p>
+        <div class="comments-show">
+            <h1>Comments are here:</h1>
+            <% office.reviews.forEach(review => { %>
+                <p> <%= review.text %> <strong><%= review.author.username %> </strong></p>
+            <% }); %> 
+            <p>
+                <a href="/offices/<%= office.id %>/reviews/new">Add new review</a>
+            </p>
+        </div>
+        
+    </div>
+</div>
 
 <%- include("../partials/footer") %>

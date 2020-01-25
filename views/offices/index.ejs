@@ -1,25 +1,27 @@
 <%- include("../partials/header") %>
 
-<div class="container">
-  <header class="jumbotron">
+<div id=container>
+  <header id="head">
     <h1>Welcome To Waterim Office Rental Webpage!</h1>
     <p>You will find one for sure!</p>
     <p>
-      <a class="btn btn-sm btn-primary" href="/offices/new"
+      <a href="/offices/new"
         >Add a new office!</a
       >
     </p>
   </header>
   <h3>The most popular offices here!</h3>
-  <div class="row">
+  <div id="card-container">
     <% offices.forEach(office => { %>
-        <div class="card" style="width: 18rem;">
+        <div class="card">
         <img src="<%= office.image %>" class="card-img-top"/>
         <div class="card-body">
-            <h5 class="card-title"><strong><%= office.name %> </strong></h5>
-            <p class="card-text">
-              <a href="/offices/<%= office.id %>" class="btn btn-secondary btn-sm">More info</a>
-            </p>
+            <p class="card-text"><strong><%= office.name %> </strong></p>
+              <a class="link-learn" href="/offices/<%= office.id %>">
+                Learn more
+              </a>
+              <i class="fas fa-caret-right"></i>
+              
         </div>
     </div>
       <% }) %>

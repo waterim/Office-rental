@@ -12,28 +12,28 @@ let offices = [
 
 
 function seedDB(){
-    Office.remove({})
-.then(()=>{
-    console.log("Database was dropped")
-    offices.forEach(seed => {
-        Office.create(seed)
-        .then( (office) => { 
-            console.log("office was added");
-            Review.create({
-                text: "That office is so bad",
-                author: "Artem"
-            }).then(review => {
-                office.reviews.push(review);
-                office.save();
-                console.log("new review was created"); 
-            }).catch(err => {
-                console.log(err)
-            });
-        }).catch(err => {console.log(err)});
-    });
-})
-.catch(err=>{console.log(err)});
+    Office.remove({});
+// .then(()=>{
+//     console.log("Database was dropped")
+//     offices.forEach(seed => {
+//         Office.create(seed)
+//         .then( (office) => { 
+//             console.log("office was added");
+//             Review.create({
+//                 text: "That office is so bad",
+//                 author: "Artem"
+//             }).then(review => {
+//                 office.reviews.push(review);
+//                 office.save();
+//                 console.log("new review was created"); 
+//             }).catch(err => {
+//                 console.log(err)
+//             });
+//         }).catch(err => {console.log(err)});
+//     });
+// })
+// .catch(err=>{console.log(err)});
 
-}
+ }
 
 module.exports = seedDB;

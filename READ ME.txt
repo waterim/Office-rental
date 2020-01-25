@@ -1,0 +1,6 @@
+Technologies:
+JavaScript,
+Node.js, 
+Express,
+ejs,
+MongoDB.

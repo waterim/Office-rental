@@ -1,115 +1,67 @@
-const express = require('express');
-const app = express();
-const bodyParser = require("body-parser");
-const mongoose = require("mongoose");
-const Office = require("./models/Office")
-const Review = require("./models/Review")
-const seedDB = require("./seeds")
+const express = require("express"),
+  bodyParser = require("body-parser"),
+  mongoose = require("mongoose"),
+  passport = require("passport"),
+  flash = require("connect-flash"),
+  LocalStrategy = require("passport-local"),
+  expressSession = require("express-session"),
+  methodOverride = require("method-override");
 
-const PORT = 4000;
-const ConnectionURL = "mongodb://localhost/office_rental"
+  
 
-mongoose.connect(ConnectionURL, {useNewUrlParser: true});
+const Office = require("./models/Office"),
+  Review = require("./models/Review"),
+  User = require("./models/User"),
+  seedDB = require("./seeds");
+
+const officeRoutes = require("./routes/offices"),
+  authRoutes = require("./routes/auth"),
+  indexRoute = require("./routes/index"),
+  reviewRoutes = require("./routes/reviews");
+
+const app = express(),
+  PORT = 4000,
+  ConnectionURL = "mongodb://localhost/office_rental";
+
+
+
+mongoose.connect(ConnectionURL, { useNewUrlParser: true });
 app.set("view engine", "ejs");
-app.set()
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(methodOverride("_method"));
+app.use(express.static(__dirname + "/public"));
+app.use(flash());
+
+//Passport CONF
+app.use(
+  expressSession({
+    secret: "Hello, my project is the best",
+    resave: false,
+    saveUninitialized: false
+  })
+);
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+app.use(function(req,res,next){
+    res.locals.currentUser = req.user;
+    res.locals.error = req.flash("error");
+    res.locals.success = req.flash("success");
+    next();
+});
+
+app.use("/", indexRoute);
+app.use("/offices", officeRoutes);
+app.use("/", authRoutes);
+app.use("/offices/:id/reviews", reviewRoutes);
 
 //Seed the DB
-seedDB();
+//seedDB();
 
-
-//GET methods Offices REST
-
-app.get("/", (req,res) => {
-    res.render("landing")
+app.listen(PORT, () => {
+  console.log("Server is running on localhost:" + PORT);
+  console.log("Office Rental Server Has Started");
 });
-
-app.get("/offices", (req,res) => {
-    //Getting all from my DB
-    Office.find()
-    .then( (AllOffices) => {
-        res.render("offices/index", {offices: AllOffices})
-    })
-    .catch( (err) => {
-        console.log("Here is an error");
-        console.log(err);
-    });
-});
-
-app.get("/offices/new", (req,res) => {
-    res.render("offices/new")
-});
-
-//All info about office
-app.get("/offices/:id" , (req,res) => {
-    Office.findById(req.params.id).populate("reviews").exec()
-    .then(foundOffice => {
-        res.render("offices/show", {office: foundOffice})
-    })
-    .catch( err => {
-        console.log("Error inside finding by id")
-        console.log(err)
-    });
-});
-
-
-
-
-//POST methods Offices
-
-app.post("/offices", (req,res) => {
-    let name = req.body.name;
-    let image = req.body.image;
-    let description = req.body.description;
-    let newOffice ={
-        name: name,
-        image: image,
-        description: description
-    }
-
-    Office.create(newOffice)
-    .then( () => {
-        res.redirect("/offices");
-        console.log("New OfficeCard added!")
-    })
-    .catch( (err) => {
-        console.log(err);
-    });
-});
-
-
-//GET mthods reviews REST
-
-app.get("/offices/:id/reviews/new", (req,res) => {
-    Office.findById(req.params.id)
-    .then( office => { 
-        res.render("reviews/new", {office:office})
-    }).catch(err => {console.log(err)});
-});
-
-
-//POST for reviews 
-
-app.post("/offices/:id/reviews", (req,res) => {
-    Office.findById(req.params.id)
-    .then(office => {
-        let text = req.body.review;
-        Review.create(text)
-        .then(review => {
-             office.reviews.push(review);
-             office.save().catch(err => {console.log(err)});
-             res.redirect("/offices/"+office.id);
-        }).catch(err => {
-            console.log(err);
-        });
-    }).catch(err => {
-        console.log(err);
-        res.redirect("/offices");
-    });
-});
- 
-
-app.listen(PORT, () =>{
-    console.log("Server is running on localhost:"+PORT)
-    console.log("Office Rental Server Has Started")
-})

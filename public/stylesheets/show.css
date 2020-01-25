@@ -1,0 +1,43 @@
+
+
+.container-show{
+    display: grid;
+
+    grid-template:  "image  desc" 40% 
+                    "image  desc" 32.5%
+                    "created  price" 10%
+                    "comments comments" 10% / 60% 40%;
+}
+
+.head-show{
+    grid-area: header;
+    display: flex;
+}
+
+.name-show{
+    margin-bottom: 0;
+}
+
+.image-show{
+    grid-area: image;
+    width: 100%;
+    top: 0;
+}
+
+.desc-show{
+    grid-area: desc;
+    text-align: center;
+}
+
+.price-show{
+    grid-area: price;
+}
+
+.created-show{
+    grid-area: created;
+}
+
+.comments-show{
+    grid-area: comments;
+}
+
