@@ -1,43 +1,34 @@
 <%- include("../partials/header") %>
-<div class="container">
-<h1>Create new offer</h1>
-<form action="/offices" method="POST">
-  <div>
-    <input type="text" name="name" placeholder="name"/>
-  </div>
-  <div>
-    <input type="text" name="image" placeholder="image url"/>
-  </div>
-  <div>
-    <input type="text" name="description" placeholder="description"/>
-  </div>
-  <div>
-    <button>Add!</button>
-  </div>
-</form>
-<a href="/offices">Go back</a>
-</div>
 <div class="login-container">
   <h1>Create new offer</h1>
   <form action="/offices" method="POST">
-      <div class="new-office-form">
-          <input type="text" name="name" placeholder="name" required/>
-          <label for="username">Login: </label>
+      <div class="login-form">
+          <input type="text" name="name" id="name-off"required/>
+          <label for="Name">Name: </label>
           <span></span>
       </div>
-      <div class="new-office-form">
-          <input type="text" name="image" placeholder="image url" required/>
-          <label for="password">Password: </label>
+      <div class="login-form">
+          <input type="text" name="image" id="image-off" required/>
+          <label for="password">Image URL: </label>
           <span></span>
       </div>
-      <div class="new-office-form">
-        <input type="text" name="description" placeholder="description" required/>
-        <label for="password">Password: </label>
+      <div class="login-form">
+        <input type="text" name="description" id="description-off" required/>
+        <label for="password">Description: </label>
+        <span></span>
+    </div>      
+    <div class="login-form">
+        <input type="text" name="country" id="country-off" required/>
+        <label for="password">Country: </label>
+        <span></span>
+    </div>      
+    <div class="login-form">
+        <input type="text" name="city" id="city-off" required/>
+        <label for="password">City: </label>
         <span></span>
     </div>
       <input type="submit" value="Submit">
       <div class="signup-link">
-          Not a member? <a href="/register">Register</a>
       </div>
   </form>
   </div>

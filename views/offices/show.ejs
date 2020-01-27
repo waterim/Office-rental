@@ -1,15 +1,19 @@
 <%- include("../partials/header") %>
-<div id="container">
+<div class="container-show-page">
     <div class="head-show">    
         <h1 class="name-show"><%= office.name %> </h1class="head-show">
+    </div>
     <div class="upd-del-show">
 <% if(currentUser && office.author.id.equals(currentUser.id) || currentUser && currentUser.isAdmin){%> 
-    <a href="/offices/<%= office.id %>/edit">Edit page</a>
+    <div class="btn-edit">
+        <a href="/offices/<%= office.id %>/edit"><button>Edit page</button></a>
+    </div>
+    <div class="btn-del">
     <form action="/offices/<%= office.id %>?_method=DELETE" method="POST">
         <button>Delete</button>
     </form>
-    <% } %> 
     </div>
+    <% } %> 
     </div>
     <div class="container-show">
         <div>
@@ -18,9 +22,29 @@
         <div class="desc-show">
             <h1>Description</h1>
             <p> <%= office.description %> </p>
+            <p class="address"> Address: <%= office.address.country %>, <%= office.address.city %> </p>
         </div>
-        <p class="price-show">Price: 100$ per day</p>
-        <p class="created-show">Post was created by <strong><%= office.author.username %></strong> </p>
+        
+        <p class="price-show">Price: <strong>100$</strong> per day</p>
+
+        <div class="created-like-show">
+        <p class="created-show">Post was created by <strong><%= office.author.username %></strong></p>
+            <form action="/offices/<%= office.id %>/like" method="POST">
+                <div class="btn-group">
+                    <% if (currentUser && office.likes.some(function (like) {
+                        return like.equals(currentUser._id)
+                    })) { %>
+                    <button class="btn">
+                        <i class="fas fa-thumbs-up"></i> Liked (<%= office.likes.length %>)
+                    </button>
+                    <% } else { %>
+                    <button class="btn">
+                        <i class="fas fa-thumbs-up"></i> Like (<%= office.likes.length %>)
+                    </button>
+                    <% } %>
+                </div>
+            </form>
+        </div>
 
         <div class="comments-show">
             <h1>Comments are here:</h1>
@@ -33,6 +57,7 @@
         </div>
         
     </div>
+    
 </div>
 
 <%- include("../partials/footer") %>

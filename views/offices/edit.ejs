@@ -1,22 +1,35 @@
 <%- include("../partials/header") %>
-<div class="container">
-<h1>Editing <%= office.name %> </h1>
-
-<form action="/offices/<%= office.id %>?_method=PUT" method="POST">
-  <div>
-    <input type="text" name="updatedOffice[name]" placeholder="name" value="<%= office.name %>"/>
+<div class="login-container">
+  <h1>Create new offer</h1>
+  <form action="/offices/<%= office.id %>?_method=PUT" method="POST">
+      <div class="login-form">
+        <input type="text" name="updatedOffice[name]" value="<%= office.name %>" required/>
+          <label for="Name">Name: </label>
+          <span></span>
+      </div>
+      <div class="login-form">
+        <input type="text" name="updatedOffice[image]" value="<%= office.image %> " required/>
+          <label for="password">Image URL: </label>
+          <span></span>
+      </div>
+      <div class="login-form">
+        <input type="text" name="updatedOffice[description]" value="<%= office.description %> " required/>
+        <label for="password">Description: </label>
+        <span></span>
+    </div>
+    <div class="login-form">
+      <input type="text" name="updatedOffice[country]" id="country-off" required/>
+      <label for="password">Country: </label>
+      <span></span>
+  </div>      
+  <div class="login-form">
+      <input type="text" name="updatedOffice[city]" id="city-off" required/>
+      <label for="password">City: </label>
+      <span></span>
   </div>
-  <div>
-    <input type="text" name="updatedOffice[image]" placeholder="image url" value="<%= office.image %> "/>
+      <input type="submit" value="Submit">
+      <div class="signup-link">
+      </div>
+  </form>
   </div>
-  <div>
-    <input type="text" name="updatedOffice[description]" placeholder="description" value="<%= office.description %> "/>
-  </div>
-  <div>
-    <button>Add!</button>
-  </div>
-</form>
-<a href="/offices">Go back</a>
-</div>
-
 <%- include("../partials/footer") %>

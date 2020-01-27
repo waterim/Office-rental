@@ -19,6 +19,14 @@
     </div>
     <div id="error-log"></div>
   </form>
+  <% if(errors && errors.length>0){ %>
+    <div class="errors">
+      <ul>
+        <% errors.forEach( someError => { %>
+        <li><%= someError.msg %></li>
+      </ul>
+    </div>
+    <% })} %>
 </div>
 
 <%- include("../partials/footer") %>

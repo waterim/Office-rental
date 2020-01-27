@@ -8,23 +8,22 @@
   <header id="head">
     <h1>Welcome To Waterim Office Rental Webpage!</h1>
     <p>You will find one for sure!</p>
-    <p>
-      <a href="/offices/new"
-        >Add a new office!</a
-      >
-    </p>
   </header>
-  <h3>The most popular offices here!</h3>
+  <h3>The most popular offices are here:</h3>
   <div id="card-container">
     <% offices.forEach(office => { %>
         <div class="card">
         <img src="<%= office.image %>" class="card-img-top"/>
         <div class="card-body">
             <p class="card-text"><strong><%= office.name %> </strong></p>
+            <div>
+              <span class="likes-index"><i class="fas fa-thumbs-up"></i> <%= office.likes.length %></span>
+            
               <a class="link-learn" href="/offices/<%= office.id %>">
                 Learn more
               </a>
               <i class="fas fa-caret-right"></i>
+            </div>
               
         </div>
     </div>

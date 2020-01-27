@@ -1,17 +1,19 @@
 <%- include("../partials/header") %>
-<div class="container">
-<h1 style="text-align: center;">Add new review to <%= office.name %> </h1>
 
+<div class="login-container">
+  <h1>Add new review to <%= office.name %></h1>
+  <form action="/offices/<%= office.id %>/reviews" method="POST">
+      <div class="login-form">
+          <input type="text" name="review[text]" required/>
+          <label for="Name">Review: </label>
+          <span></span>
+      </div>
+      <input type="submit" value="Submit">
+      <div class="signup-link">
+        <a href="/offices">Go back</a>
+      </div>
+  </form>
+  </div>
 
-<form action="/offices/<%= office.id %>/reviews" method="POST">
-  <div class="form-group">
-    <input class="form-control" type="text" name="review[text]" placeholder="text"/>
-  </div>
-  <div class="form-group">
-    <button class="btn btn-secondary btn-lg btn-block">Add!</button>
-  </div>
-</form>
-<a href="/offices">Go back</a>
-</div>
 
 <%- include("../partials/footer") %>

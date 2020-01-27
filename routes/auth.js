@@ -18,7 +18,7 @@ router.get("/register", (req,res) =>{
 
 
 router.get("/login", (req,res) => {
-    res.render("authentication/login");
+    res.render("authentication/login", {success:req.session.success, errors: req.session.errors});
 });
 
 router.get("/logout", (req,res) => {
@@ -29,11 +29,11 @@ router.get("/logout", (req,res) => {
 })
 
 //POST methods
-router.post("/register", [
+router.post("/register",(req,res) => {
     check("email", 'Invalid email address').isEmail(),
     check("username").not().isEmpty().withMessage("Username is required"),
-    check("password", "Password is incorrect").isLength({min:6}),
-],(req,res) => {
+    check("password", "Password is incorrect").isLength({min:4})
+
     let errors = validationResult(req).array();
     console.log(errors);
     let username = req.body.username;
@@ -68,14 +68,13 @@ router.post("/register", [
 
 })
 
-router.post("/login", passport.authenticate("local", 
+router.post("/login", passport.authenticate("local",
+
     {
         successRedirect: "/offices",
         failureRedirect: "/login"
-    }),(req,res) => {
-        // if(isLoggedIn){
-        //     req.flash("success", "Welcome here");
-        // }
+    }
+    ),(req,res) => {
 })
 
 function isLoggedIn(req, res, next){

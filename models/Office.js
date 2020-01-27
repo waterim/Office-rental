@@ -23,10 +23,10 @@ const officeSchema = new mongoose.Schema({
             ref: "User"
         }
     ], 
-    // address: {
-    //     city: String,
-        
-    // }
+    address: {
+        country: String,
+        city: String
+    }
 });
 let Office = mongoose.model("Office", officeSchema);
 

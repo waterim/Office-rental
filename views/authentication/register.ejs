@@ -19,25 +19,20 @@
       <span></span>
     </div>
     <div class="login-form">
-      <input
-        type="text"
-        id="adminCode"
-        name="adminCode"
-        placeholder="Admin code"
-      />
+      <input type="text" id="adminCode" name="adminCode" placeholder="Admin code"/>
     </div>
-    <input type="submit" value="Submit" />
+    <input type="submit" value="Submit"/>
     <div class="signup-link">You're a member? <a href="/login">Login</a></div>
     <div id="error"></div>
-    <% if(errors){ %>
+  </form>
+  <% if(errors && errors.length>0){ %>
     <div class="errors">
       <ul>
-        <% errors.forEach( error => { %>
-        <li><%= error.msg %></li>
+        <% errors.forEach( someError => { %>
+        <li><%= someError.msg %></li>
       </ul>
     </div>
     <% })} %>
-  </form>
 </div>
 
 <%- include("../partials/footer") %>

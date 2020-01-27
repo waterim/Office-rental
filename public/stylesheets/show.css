@@ -1,4 +1,8 @@
-
+.container-show-page{
+    margin: 20px;
+    padding: 20px;
+    background-color: #cecece;
+}
 
 .container-show{
     display: grid;
@@ -10,22 +14,80 @@
 }
 
 .head-show{
-    grid-area: header;
     display: flex;
+    margin: 0 auto;
 }
 
 .name-show{
-    margin-bottom: 0;
+    display: flex;
+    margin: 0 auto;
+    /* padding-bottom:30px; */
+}
+
+.upd-del-show{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.btn-del{
+    margin: 0 5px;
+}
+
+.btn-del form{
+    height: 30px;
+}
+
+.btn-del form button{
+    background: none;
+    outline: none;
+    height: 100%;
+    background: #e23939;
+    color: #2691d9;
+    border-radius: 20px;
+}
+
+.btn-del form button:hover{
+    background: red;
+    border: none;
+}
+
+
+.btn-edit{
+    margin: 0 5px;
+    height: 30px;
+}
+
+.btn-edit button{
+    background: none;
+    outline: none;
+    height: 100%;
+    color: #2691d9;
+    background: #e2e22d;
+    border-radius: 20px;
+}
+
+.btn-edit button:hover{
+    background: yellow;
+    border: none;
 }
 
 .image-show{
     grid-area: image;
     width: 100%;
-    top: 0;
+}
+
+.address{
+    font-weight: bolder;
+    font-size: 20px;
+    display: flex;
+    flex-direction: column;
+    align-content: flex-end;
+    justify-content: flex-end;
 }
 
 .desc-show{
     grid-area: desc;
+    height: 100%;
     text-align: center;
 }
 
@@ -33,7 +95,7 @@
     grid-area: price;
 }
 
-.created-show{
+.created-like-show{
     grid-area: created;
 }
 
@@ -41,3 +103,12 @@
     grid-area: comments;
 }
 
+.btn{
+    height: 30px;
+    border-radius: 20px;
+
+}
+
+.btn:hover{
+    border:none
+}

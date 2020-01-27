@@ -216,6 +216,7 @@ nav {
 }
 
 .login-container h1 {
+    color: #ffffff;
     text-align: center;
     padding: 0 0 20px 0;
     border-bottom: 1px solid silver;
@@ -330,19 +331,28 @@ nav {
 /* OFFICES PAGE */
 
 #head {
-    background-color: gray;
-    width: 50%;
-    margin: 0 auto;
+    text-shadow: black;
+    background-color: #cecece;
+    padding: 10px;
+    margin: 15px auto;
+    width: 70%;
     text-align: center;
 }
 
-#container{
+#container{ 
     width: 100%;
+}
+
+#container h3{
+    margin: 30px;
+    font-size: 30px;
+    text-decoration: underline;
 }
 
 #card-container{
     display: flex;
     flex-wrap: wrap;
+    margin: 0 30px;
 }   
 
 .card{
@@ -372,10 +382,15 @@ nav {
    
 }
 
+.likes-index{
+    margin:auto;
+}
+
 .link-learn{
     font-size: 18px;
     float: left;
     margin: 0 0 10px 5px;
+    color:#2691d9;
 }
 
 i.fas.fa-caret-right{

@@ -23,7 +23,7 @@ router.get("/new", isLoggedIn,  (req,res) => {
 
 //All info about office
 router.get("/:id" , (req,res) => {
-    Office.findById(req.params.id).populate("reviews").exec()
+    Office.findById(req.params.id).populate("reviews likes").exec()
     .then(foundOffice => {
         res.render("offices/show", {office: foundOffice})
     })
@@ -42,11 +42,16 @@ router.post("/", isLoggedIn, (req,res) => {
         id: req.user.id,
         username: req.user.username
     }
+    let address = {
+        country: req.body.country,
+        city: req.body.city
+    }
     let newOffice ={
         name: name,
         image: image,
         description: description,
-        author: author
+        author: author,
+        address: address
     }
 
     Office.create(newOffice)
@@ -94,10 +99,10 @@ router.delete("/:id",isAuthorized, (req,res) => {
 router.post("/:id/like", isLoggedIn, (req, res) => {
     Office.findById(req.params.id).then(foundOffice => {
         let foundUserLike = foundOffice.likes.some(function (like) {
-            return like.equals(req.user._id);
+            return like.equals(req.user.id);
         }); 
         if(foundUserLike){
-            foundOffice.likes.pull(req.user);
+            foundOffice.likes.pull(req.user.id);
         }
         else{
             foundOffice.likes.push(req.user);
@@ -110,7 +115,7 @@ router.post("/:id/like", isLoggedIn, (req, res) => {
             return res.redirect("/offices");
         });
     }).catch(err => {
-        return res.redirect("offices");
+        return res.redirect("/offices");
     })
 });
 
@@ -139,9 +144,6 @@ function isAuthorized(req,res,next){
         res.redirect(`/offices/${foundOffice.id}`)
     }
 }
-
-
-
 
 function isLoggedIn(req, res, next){
     if(req.isAuthenticated()){
