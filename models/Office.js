@@ -17,7 +17,16 @@ const officeSchema = new mongoose.Schema({
             ref: "Review"
         }
     ],
-    
+    likes: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User"
+        }
+    ], 
+    // address: {
+    //     city: String,
+        
+    // }
 });
 let Office = mongoose.model("Office", officeSchema);
 

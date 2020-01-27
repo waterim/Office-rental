@@ -7,6 +7,8 @@ const express = require("express"),
   expressSession = require("express-session"),
   methodOverride = require("method-override");
 
+  const { check, validationResult } = require('express-validator');
+
   
 
 const Office = require("./models/Office"),
@@ -48,6 +50,7 @@ passport.deserializeUser(User.deserializeUser());
 
 app.use(function(req,res,next){
     res.locals.currentUser = req.user;
+    res.locals.errors = req.session.errors;
     res.locals.error = req.flash("error");
     res.locals.success = req.flash("success");
     next();

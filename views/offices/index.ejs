@@ -1,5 +1,9 @@
 <%- include("../partials/header") %>
 
+<% if(currentUser && currentUser.isAdmin) {%>
+    <h1>You're an admin</h1>
+<% } %> 
+
 <div id=container>
   <header id="head">
     <h1>Welcome To Waterim Office Rental Webpage!</h1>

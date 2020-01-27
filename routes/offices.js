@@ -89,6 +89,32 @@ router.delete("/:id",isAuthorized, (req,res) => {
 });
 
 
+
+// Office Like Route
+router.post("/:id/like", isLoggedIn, (req, res) => {
+    Office.findById(req.params.id).then(foundOffice => {
+        let foundUserLike = foundOffice.likes.some(function (like) {
+            return like.equals(req.user._id);
+        }); 
+        if(foundUserLike){
+            foundOffice.likes.pull(req.user);
+        }
+        else{
+            foundOffice.likes.push(req.user);
+        }
+
+        foundOffice.save().then(()=>{
+            return res.redirect(`/offices/${foundOffice.id}`);
+        })
+        .catch(err => {
+            return res.redirect("/offices");
+        });
+    }).catch(err => {
+        return res.redirect("offices");
+    })
+});
+
+
 function isAuthorized(req,res,next){
     let idOffice = req.params.id;
     if(req.isAuthenticated()){
@@ -96,7 +122,7 @@ function isAuthorized(req,res,next){
         .then(foundOffice => {
             let idAuthor = foundOffice.author.id;
             let idUser = req.user.id;
-            if(idAuthor.equals(idUser)){
+            if(idAuthor.equals(idUser) || req.user.isAdmin){
                 return next();
             }
             else{
@@ -113,6 +139,7 @@ function isAuthorized(req,res,next){
         res.redirect(`/offices/${foundOffice.id}`)
     }
 }
+
 
 
 

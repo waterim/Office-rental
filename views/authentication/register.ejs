@@ -1,23 +1,43 @@
 <%- include("../partials/header") %>
 
 <div class="login-container">
-    <h1>Register form</h1>
-    <form action="/register" method="POST" onsubmit="return validateForm()">
-        <div class="login-form">
-            <input type="text" id="login" name="username" required>
-            <label for="username">Login: </label>
-            <span></span>
-        </div>
-        <div class="login-form">
-            <input type="password" id="password" name="password" required>
-            <label for="password">Password: </label>
-            <span></span>
-        </div>
-        <input type="submit" value="Submit">
-        <div class="signup-link">
-            You're a member? <a href="/login">Login</a>
-        </div>
-    </form>
+  <h1>Register form</h1>
+  <form action="/register" method="POST" id="reg-form">
+    <div class="login-form">
+      <input type="text" id="email" name="email" required />
+      <label for="email">Email: </label>
+      <span></span>
     </div>
+    <div class="login-form">
+      <input type="text" id="login" name="username" required />
+      <label for="login">Login: </label>
+      <span></span>
+    </div>
+    <div class="login-form">
+      <input type="password" id="password" name="password" required />
+      <label for="password">Password: </label>
+      <span></span>
+    </div>
+    <div class="login-form">
+      <input
+        type="text"
+        id="adminCode"
+        name="adminCode"
+        placeholder="Admin code"
+      />
+    </div>
+    <input type="submit" value="Submit" />
+    <div class="signup-link">You're a member? <a href="/login">Login</a></div>
+    <div id="error"></div>
+    <% if(errors){ %>
+    <div class="errors">
+      <ul>
+        <% errors.forEach( error => { %>
+        <li><%= error.msg %></li>
+      </ul>
+    </div>
+    <% })} %>
+  </form>
+</div>
 
 <%- include("../partials/footer") %>

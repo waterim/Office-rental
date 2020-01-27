@@ -3,7 +3,7 @@
     <div class="head-show">    
         <h1 class="name-show"><%= office.name %> </h1class="head-show">
     <div class="upd-del-show">
-<% if(currentUser && office.author.id.equals(currentUser.id)){%> 
+<% if(currentUser && office.author.id.equals(currentUser.id) || currentUser && currentUser.isAdmin){%> 
     <a href="/offices/<%= office.id %>/edit">Edit page</a>
     <form action="/offices/<%= office.id %>?_method=DELETE" method="POST">
         <button>Delete</button>

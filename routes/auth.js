@@ -2,6 +2,7 @@ const express = require("express"),
       passport = require("passport");
 
 const User = require("../models/User");
+const { check, validationResult } = require('express-validator');
 
 const router = express.Router();
 
@@ -11,7 +12,8 @@ const router = express.Router();
 // ==========
 //GET methods
 router.get("/register", (req,res) =>{
-    res.render("authentication/register");
+    res.render("authentication/register", {success:req.session.success, errors: req.session.errors});
+    req.session.errors = null;
 });
 
 
@@ -27,20 +29,43 @@ router.get("/logout", (req,res) => {
 })
 
 //POST methods
-router.post("/register", (req,res) => {
+router.post("/register", [
+    check("email", 'Invalid email address').isEmail(),
+    check("username").not().isEmpty().withMessage("Username is required"),
+    check("password", "Password is incorrect").isLength({min:6}),
+],(req,res) => {
+    let errors = validationResult(req).array();
+    console.log(errors);
     let username = req.body.username;
     let password = req.body.password;
-    let newUser = new User({username:username});
-    User.register(newUser, password)
-    .then(user => {
-        passport.authenticate("local")(req,res, () => {
-            res.redirect("/offices");
-        })
-    }).catch(err => {
-        req.flash("error", err.message);
-        console.log(err);
+    let email = req.body.email;
+
+    if(!errors.length == 0){
+        console.log("12")
+        req.session.errors = errors;
+        req.session.success = false;
         return res.render("authentication/register");
-    })
+    }
+    else{
+        console.log("22")
+        req.session.success = true;
+        let newUser = new User({username:username, email:email});
+        if(req.body.adminCode === "admin"){
+            newUser.isAdmin = true;
+        }
+        User.register(newUser, password)
+        .then(user => {
+            passport.authenticate("local")(req,res, () => {
+            res.redirect("/offices");
+            })
+        })
+        .catch(err => {
+            req.flash("error", err.message);
+            console.log(err);
+            return res.render("authentication/register");
+        });
+    }
+
 })
 
 router.post("/login", passport.authenticate("local", 
@@ -48,7 +73,9 @@ router.post("/login", passport.authenticate("local",
         successRedirect: "/offices",
         failureRedirect: "/login"
     }),(req,res) => {
-
+        // if(isLoggedIn){
+        //     req.flash("success", "Welcome here");
+        // }
 })
 
 function isLoggedIn(req, res, next){

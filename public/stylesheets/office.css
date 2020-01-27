@@ -82,7 +82,7 @@ nav {
     left: 0;
     bottom: 0;
     transform: scaleX(0);
-    transform-origin: right;
+    transform-origin : right;
     transition: transform 650ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
@@ -319,8 +319,8 @@ nav {
     background-color: green;
 }
 
-.login-form.error{
-    content: "Error!"
+.login-container form .login-form input.error{
+    background: rgb(232, 89, 89);
 }
 
 
@@ -343,7 +343,7 @@ nav {
 #card-container{
     display: flex;
     flex-wrap: wrap;
-}
+}   
 
 .card{
     border: 1px solid #cecece;

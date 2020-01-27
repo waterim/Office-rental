@@ -4,3 +4,4 @@ selectElement(".hamburger").addEventListener("click", ()=>{
     selectElement(".hamburger").classList.toggle("active");
     selectElement(".nav-list").classList.toggle("active");
 })
+
