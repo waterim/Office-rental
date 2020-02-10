@@ -1,0 +1,12 @@
+<%- include("partials/header") %>
+
+<h1>Error</h1>
+<p>
+    <% if(err && err.length>1) {%> 
+        <strong>Error:</strong> <%= err.message %> 
+    <% }else{ %> 
+        <strong>Errors:</strong> <%= err.message %> 
+    <% } %> 
+</p>
+
+<%- include("partials/footer") %>

@@ -1,15 +1,27 @@
 const mongoose = require("mongoose");
 
 const officeSchema = new mongoose.Schema({
-    name: String,
-    image: String,
-    description: String,
+    name: {
+        type: String,
+        required: true
+    },
+    image: {
+        type: String,
+        required: true
+    },
+    description: {
+        type: String,
+        required: true
+    },
     author: {
         id: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "User"
         },
-        username: String
+        username: {
+            type: String,
+            required: true
+        },
     },
     reviews: [
         {
@@ -24,8 +36,14 @@ const officeSchema = new mongoose.Schema({
         }
     ], 
     address: {
-        country: String,
-        city: String
+        country: {
+            type: String,
+            required: true
+        },
+        city: {
+            type: String,
+            required: true
+        },
     }
 });
 let Office = mongoose.model("Office", officeSchema);

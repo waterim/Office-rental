@@ -1,11 +1,19 @@
 const passportLocalMongoose = require("passport-local-mongoose");
-const mongoose = require("mongoose");
+const mongoose = require("mongoose"),
+      validate = require("mongoose-validate")
 
 
 
 const UserSchema = new mongoose.Schema({
-    email: String,
-    username: String,
+    email: {
+        type: String,
+        required: true,
+        validate: [validate.email, "Is not correct email"]
+    },
+    username: {
+        type: String,
+        required: true
+    },
     password: String,
     isAdmin: {
         type: Boolean,

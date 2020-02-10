@@ -51,3 +51,4 @@ formLog.addEventListener("submit", e => {
         errorLog.innerText = messages.join(', ');
     }
 });
+

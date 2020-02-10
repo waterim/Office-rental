@@ -18,12 +18,12 @@
         <span></span>
     </div>
     <div class="login-form">
-      <input type="text" name="updatedOffice[country]" id="country-off" required/>
+      <input type="text" name="updatedOffice[address.country]" id="country-off" value="<%= office.address.country %> " required />
       <label for="password">Country: </label>
       <span></span>
   </div>      
   <div class="login-form">
-      <input type="text" name="updatedOffice[city]" id="city-off" required/>
+      <input type="text" name="updatedOffice[address.city]" id="city-off" value="<%= office.address.city %> " required/>
       <label for="password">City: </label>
       <span></span>
   </div>

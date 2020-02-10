@@ -29,6 +29,8 @@ router.post("/", isLoggedIn,  (req,res) => {
         }).catch(err => {
             req.flash("error", "Whoops, something went wrong");
             console.log(err);
+            console.log(req.user)
+            return res.render("errorPage", {err:err})
         });
     }).catch(err => {
         console.log(err);

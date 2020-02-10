@@ -61,6 +61,7 @@ router.post("/", isLoggedIn, (req,res) => {
     })
     .catch( (err) => {
         console.log(err);
+        return res.render("errorPage", { err: err });
     });
 });
 
@@ -77,8 +78,9 @@ router.get("/:id/edit",isAuthorized, (req,res) => {
 router.put("/:id",isAuthorized, (req,res) => {
     let id = req.params.id;
     let updatedOfficeData = req.body.updatedOffice;
+    
     Office.findByIdAndUpdate(id, updatedOfficeData)
-    .then(updatedOffice => {
+    .then(updatedOfficeData => {
         res.redirect(`/offices/${id}`)
     }).catch(err => {
         res.redirect("/offices");

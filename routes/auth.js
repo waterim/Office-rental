@@ -41,13 +41,11 @@ router.post("/register",(req,res) => {
     let email = req.body.email;
 
     if(!errors.length == 0){
-        console.log("12")
         req.session.errors = errors;
         req.session.success = false;
         return res.render("authentication/register");
     }
     else{
-        console.log("22")
         req.session.success = true;
         let newUser = new User({username:username, email:email});
         if(req.body.adminCode === "admin"){
@@ -60,8 +58,8 @@ router.post("/register",(req,res) => {
             })
         })
         .catch(err => {
-            req.flash("error", err.message);
             console.log(err);
+            req.flash("error", err.message);
             return res.render("authentication/register");
         });
     }
